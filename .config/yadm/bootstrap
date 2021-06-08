@@ -8,6 +8,8 @@ if [ "$system_type" = "Darwin" ]; then
   if ! command -v brew >/dev/null 2>&1; then
     echo "--> Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    echo "--> Homebrew already installed"
   fi
 
   if [ -f "$HOME/.Brewfile" ]; then
@@ -18,13 +20,13 @@ if [ "$system_type" = "Darwin" ]; then
   # install --user common dependencies
   if command -v brew >/dev/null 2>&1; then
     echo "--> Installing common python dependencies"
-    pip install -U pip
-    pip install --user tox wheel
+    pip3 install -U pip
+    pip3 install --user tox wheel
   fi
 
   if ! command -v poetry >/dev/null 2>&1; then
     echo "--> Installing Poetry package manager"
-    curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+    curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3
   fi
 
   if ! command -v nvm >/dev/null 2>&1; then

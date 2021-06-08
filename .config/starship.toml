@@ -1,0 +1,26 @@
+format = """\
+    $python\
+    $nodejs\
+    $env_var\
+    $cmd_duration\
+    $custom\
+    $line_break\
+    $directory\
+    $package\
+    $git_branch\
+    $git_commit\
+    $git_state\
+    $git_status\
+    $character\
+    """
+
+[git_branch]
+symbol = ""
+
+[git_status]
+style = "gray"
+
+[env_var]
+symbol = "🐳 "
+variable = "DOCKER_IMAGE_TAG"
+format = "using [$symbol$env_value]($style) "

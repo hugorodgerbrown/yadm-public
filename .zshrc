@@ -7,6 +7,10 @@ setopt HIST_EXPIRE_DUPS_FIRST       # remove oldest duplicate commands from the 
 setopt HIST_IGNORE_SPACE            # don't save commands beginning with spaces to history
 setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating history
 
+# https://superuser.com/a/418299
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
+
 echo '... setting up aliases'
 alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
 alias ll="ls -al"

@@ -14,9 +14,9 @@ bindkey '\e[B' history-beginning-search-forward
 echo '... setting up aliases'
 alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
 alias ll="ls -al"
-alias dc="docker-compose"
+alias dc="docker compose"
 alias mc="mutagen compose"
-alias manage="docker-compose run --rm django"
+alias manage="docker compose run --rm django"
 alias heroky="heroku run python manage.py"
 
 restart-django(){

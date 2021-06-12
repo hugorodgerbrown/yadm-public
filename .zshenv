@@ -1,3 +1,4 @@
+#!/bin/zsh
 echo '--> Setting environment variables'
 export EDITOR="subl -w"
 export HOMEBREW_AUTO_UPDATE_SECS=86400

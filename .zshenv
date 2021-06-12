@@ -8,11 +8,18 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_VENV_IN_PROJECT=1
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-# expands to export various HOMEBREW_* vars
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# ==== taken from the Homebrew install script
+UNAME_MACHINE="$(/usr/bin/uname -m)"
+if [[ "$UNAME_MACHINE" == "arm64" ]]; then
+    # On ARM macOS, this script installs to /opt/homebrew only
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    # On Intel macOS, this script installs to /usr/local only
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+# /==== taken from the Homebrew install script
 
 echo '--> Setting compiler flags for qpdf, readline, openssl, zlib'
-
 # qpdf flags (required for PikePDF):
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/qpdf/lib"
 export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/qpdf/include"

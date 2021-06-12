@@ -29,9 +29,9 @@ if [ "$system_type" = "Darwin" ]; then
     curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3
   fi
 
-  if ! command -v nvm >/dev/null 2>&1; then
-    echo "--> Installing nvm"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-  fi
+  # if ! command -v nvm >/dev/null 2>&1; then
+  #   echo "--> Installing nvm"
+  #   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+  # fi
 
 fi

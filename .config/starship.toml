@@ -21,6 +21,7 @@ symbol = ""
 style = "gray"
 
 [env_var]
+style = "white"
 symbol = "🐳 "
 variable = "DOCKER_IMAGE_TAG"
-format = "using [$symbol$env_value]($style) "
+format = "via [$symbol$env_value]($style) "

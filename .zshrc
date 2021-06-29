@@ -11,7 +11,7 @@ setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating hi
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
-echo '... setting up aliases'
+echo '... setting up default aliases'
 alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
 alias ll="ls -al"
 alias dc="docker compose"
@@ -37,7 +37,7 @@ git-counter(){
 }
 
 if [ -f "$HOME/.aliases" ]; then
-    echo "... setting up external aliases"
+    echo "... setting up additional aliases"
     source $HOME/.aliases
 fi
 
@@ -51,5 +51,5 @@ echo "--> Initialising NVM"
 # This loads nvm bash_completion
 [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
-echo "--> Configuring Starship prompt"
+echo "--> Configuring prompt"
 eval "$(starship init zsh)"

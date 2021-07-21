@@ -19,10 +19,12 @@ alias mc="mutagen compose"
 alias manage="docker compose run --rm django"
 alias heroky="heroku run python manage.py"
 
-restart-django(){
-    echo "Stopping django container" && mutagen compose stop django
-    echo "Removing django container" && mutagen compose rm -sf django
-    echo "Creating django container" && mutagen compose up $1 django
+rebuild-container(){
+    CONTAINER="${1:-django}"
+    MODE="${2:-}"
+    echo "Stopping $CONTAINER container" && mutagen compose stop $CONTAINER
+    echo "Removing $CONTAINER container" && mutagen compose rm -sf $CONTAINER
+    echo "Creating $CONTAINER container" && mutagen compose up $MODE $CONTAINER
 }
 
 # outputs the number of PRs merged and line diff between two dates

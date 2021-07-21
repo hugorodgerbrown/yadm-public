@@ -41,6 +41,9 @@ if [ -f "$HOME/.aliases" ]; then
     source $HOME/.aliases
 fi
 
+echo "--> Initialising direnv"
+eval "$(direnv hook zsh)"
+
 echo "--> Initialising pyenv"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"

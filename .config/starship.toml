@@ -1,13 +1,13 @@
 format = """\
     $python\
     $nodejs\
+    $git_branch\
     $env_var\
     $cmd_duration\
     $custom\
     $line_break\
     $directory\
     $package\
-    $git_branch\
     $git_commit\
     $git_state\
     $git_status\

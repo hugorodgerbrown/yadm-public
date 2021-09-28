@@ -1,6 +1,6 @@
 #!/bin/zsh
-echo '--> Configuring shell'
-echo '... setting zsh options'
+echo '--> Configuring shell:'
+echo '... zsh options'
 setopt HIST_IGNORE_ALL_DUPS         # ignore duplication command history list
 setopt HIST_VERIFY                  # expand history onto the current line instead of executing it
 setopt HIST_EXPIRE_DUPS_FIRST       # remove oldest duplicate commands from the history first
@@ -11,7 +11,7 @@ setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating hi
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
-echo '... setting up default aliases'
+echo '... default aliases'
 alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
 alias ll="ls -al"
 alias dc="docker compose"
@@ -22,9 +22,9 @@ alias heroky="heroku run python manage.py"
 rebuild-container(){
     CONTAINER="${1:-django}"
     MODE="${2:-}"
-    echo "Stopping $CONTAINER container" && mutagen compose stop $CONTAINER
-    echo "Removing $CONTAINER container" && mutagen compose rm -sf $CONTAINER
-    echo "Creating $CONTAINER container" && mutagen compose up $MODE $CONTAINER
+    echo "Stopping $CONTAINER container" && docker compose stop $CONTAINER
+    echo "Removing $CONTAINER container" && docker compose rm -sf $CONTAINER
+    echo "Creating $CONTAINER container" && docker compose up $MODE $CONTAINER
 }
 
 # outputs the number of PRs merged and line diff between two dates
@@ -39,7 +39,7 @@ git-counter(){
 }
 
 if [ -f "$HOME/.aliases" ]; then
-    echo "... setting up additional aliases"
+    echo "... local aliases (\$HOME/.aliases)"
     source $HOME/.aliases
 fi
 

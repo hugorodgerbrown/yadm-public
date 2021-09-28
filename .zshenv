@@ -20,28 +20,32 @@ else
 fi
 # /==== taken from the Homebrew install script
 
-echo '... setting compiler flags for qpdf, readline, openssl, zlib'
+echo -n '... setting compiler flags: '
+echo -n 'qpdf'
 # qpdf flags (required for PikePDF):
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/qpdf/lib"
 export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/qpdf/include"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/qpdf/lib/pkgconfig"
 
 # readline flags:
+echo -n ', readline'
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/readline/lib"
 export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/readline/include"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/readline/lib/pkgconfig"
 
 # zlib flags
+echo -n ', zlib'
 export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/zlib/include"
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/zlib/lib"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig"
 
 # openssl@1.1 flags:
+echo ', openssl'
 export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/openssl/include"
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/openssl/lib"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/openssl/lib/pkgconfig"
 
-echo '... setting PATH'
+echo '... setting $PATH'
 PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 PATH="$PYENV_ROOT/bin:$PATH"
 PATH="$HOME/.poetry/bin:$PATH"

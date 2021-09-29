@@ -1,17 +1,14 @@
 #!/bin/zsh
 echo '--> Configuring shell:'
-echo '... zsh options'
+echo ' .. set zsh options'
 setopt HIST_IGNORE_ALL_DUPS         # ignore duplication command history list
 setopt HIST_VERIFY                  # expand history onto the current line instead of executing it
 setopt HIST_EXPIRE_DUPS_FIRST       # remove oldest duplicate commands from the history first
 setopt HIST_IGNORE_SPACE            # don't save commands beginning with spaces to history
 setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating history
 
-# https://superuser.com/a/418299
-bindkey '\e[A' history-beginning-search-backward
-bindkey '\e[B' history-beginning-search-forward
-
-echo '... default aliases'
+echo ' .. add default aliases'
+alias brew='brew -v'
 alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
 alias ll="ls -al"
 alias dc="docker compose"
@@ -19,6 +16,12 @@ alias mc="mutagen compose"
 alias manage="docker compose run --rm django"
 alias heroky="heroku run python manage.py"
 
+if [ -f "$HOME/.aliases" ]; then
+    echo " .. add local aliases (\$HOME/.aliases)"
+    source $HOME/.aliases
+fi
+
+echo ' .. add shell functions'
 rebuild-container(){
     CONTAINER="${1:-django}"
     MODE="${2:-}"
@@ -38,10 +41,10 @@ git-counter(){
     echo "$count PRs merged; $stats"
 }
 
-if [ -f "$HOME/.aliases" ]; then
-    echo "... local aliases (\$HOME/.aliases)"
-    source $HOME/.aliases
-fi
+# https://superuser.com/a/418299
+echo ' .. bind keys'
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
 
 echo "--> Initialising direnv"
 eval "$(direnv hook zsh)"
@@ -56,5 +59,5 @@ echo "--> Initialising NVM"
 # This loads nvm bash_completion
 [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
-echo "--> Configuring prompt"
+echo "--> Initialising starship prompt"
 eval "$(starship init zsh)"

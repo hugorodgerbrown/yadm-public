@@ -20,7 +20,7 @@ else
 fi
 # /==== taken from the Homebrew install script
 
-echo -n '... setting compiler flags: '
+echo -n ' .. setting compiler flags: '
 echo -n 'qpdf'
 # qpdf flags (required for PikePDF):
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/qpdf/lib"
@@ -45,7 +45,7 @@ export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/openssl/include"
 export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/openssl/lib"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/openssl/lib/pkgconfig"
 
-echo '... setting $PATH'
+echo ' .. setting $PATH'
 PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 PATH="$PYENV_ROOT/bin:$PATH"
 PATH="$HOME/.poetry/bin:$PATH"

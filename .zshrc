@@ -1,5 +1,5 @@
 #!/bin/zsh
-echo '--> Configuring shell:'
+echo '--> Configuring shell'
 echo ' .. set zsh options'
 setopt HIST_IGNORE_ALL_DUPS         # ignore duplication command history list
 setopt HIST_VERIFY                  # expand history onto the current line instead of executing it

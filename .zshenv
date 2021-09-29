@@ -8,8 +8,16 @@ export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_VENV_IN_PROJECT=1
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+echo " .. set PATH"
+PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+PATH="$PYENV_ROOT/bin:$PATH"
+PATH="$HOME/.poetry/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOMEBREW_PREFIX/bin:$PATH"
+export PATH
 
 # ==== taken from the Homebrew install script
+echo " .. run homebrew shellenv"
 UNAME_MACHINE="$(/usr/bin/uname -m)"
 if [[ "$UNAME_MACHINE" == "arm64" ]]; then
     # On ARM macOS, this script installs to /opt/homebrew only
@@ -20,35 +28,12 @@ else
 fi
 # /==== taken from the Homebrew install script
 
-echo -n ' .. setting compiler flags: '
-echo -n 'qpdf'
-# qpdf flags (required for PikePDF):
-export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/qpdf/lib"
-export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/qpdf/include"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/qpdf/lib/pkgconfig"
-
-# readline flags:
-echo -n ', readline'
-export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/readline/lib"
-export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/readline/include"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/readline/lib/pkgconfig"
-
-# zlib flags
-echo -n ', zlib'
-export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/zlib/include"
-export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/zlib/lib"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig"
-
-# openssl@1.1 flags:
-echo ', openssl'
-export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/openssl/include"
-export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/openssl/lib"
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/openssl/lib/pkgconfig"
-
-echo ' .. setting $PATH'
-PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-PATH="$PYENV_ROOT/bin:$PATH"
-PATH="$HOME/.poetry/bin:$PATH"
-PATH="$HOME/.local/bin:$PATH"
-PATH="$HOMEBREW_PREFIX/bin:$PATH"
-export PATH
+echo -n ' .. set compiler flags: '
+for FLAG in qpdf readline zlib openssl
+do
+    export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/$FLAG/lib"
+    export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/$FLAG/include"
+    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH $HOMEBREW_PREFIX/opt/$FLAG/lib/pkgconfig"
+    echo -n "$FLAG "
+done
+echo ""

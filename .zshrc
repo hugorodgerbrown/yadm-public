@@ -8,7 +8,7 @@ setopt HIST_IGNORE_SPACE            # don't save commands beginning with spaces 
 setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating history
 
 echo ' .. add default aliases'
-alias brew='brew -v'
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'
 alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
 alias ll="ls -al"
 alias dc="docker compose"
@@ -61,3 +61,6 @@ echo "--> Initialising NVM"
 
 echo "--> Initialising starship prompt"
 eval "$(starship init zsh)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

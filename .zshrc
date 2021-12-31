@@ -9,7 +9,7 @@ setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating hi
 
 echo ' .. add default aliases'
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'
-alias clear_pyc="find . -type f -name '*.pyc' -exec rm -f {} \;"
+alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v" 
 alias ll="ls -al"
 alias dc="docker compose"
 alias mc="mutagen compose"

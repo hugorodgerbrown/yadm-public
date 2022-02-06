@@ -1,15 +1,11 @@
-#!/bin/zsh
-echo '--> Configuring shell'
+#!/usr/bin/env zsh
+echo '--> Configuring shell [.zshrc]'
 echo ' .. set zsh options'
-setopt HIST_IGNORE_ALL_DUPS         # ignore duplication command history list
-setopt HIST_VERIFY                  # expand history onto the current line instead of executing it
-setopt HIST_EXPIRE_DUPS_FIRST       # remove oldest duplicate commands from the history first
-setopt HIST_IGNORE_SPACE            # don't save commands beginning with spaces to history
-setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating history
+source $HOME/.zsh_options
 
 echo ' .. add default aliases'
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'
-alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v" 
+alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v"
 alias ll="ls -al"
 alias dc="docker compose"
 alias mc="mutagen compose"
@@ -17,7 +13,7 @@ alias manage="docker compose run --rm django"
 alias heroky="heroku run python manage.py"
 
 if [ -f "$HOME/.aliases" ]; then
-    echo " .. add local aliases (\$HOME/.aliases)"
+    echo " .. add local aliases"
     source $HOME/.aliases
 fi
 
@@ -46,21 +42,30 @@ echo ' .. bind keys'
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
-echo "--> Initialising direnv"
+echo " .. Initialising direnv"
 eval "$(direnv hook zsh)"
 
-echo "--> Initialising pyenv"
+echo " .. Initialising pyenv"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
-echo "--> Initialising NVM"
+echo " .. Initialising NVM"
 # This loads nvm
 [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
 # This loads nvm bash_completion
 [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
-echo "--> Initialising starship prompt"
+echo " .. Initialising starship prompt"
 eval "$(starship init zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Moved from .zshenv to ensure it's the last thing that runs, otherwise
+# the /etc/zprofile overtakes it.
+echo " .. set PATH"
+PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+PATH="$PYENV_ROOT/bin:$PATH"
+PATH="$HOME/.poetry/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+PATH="$HOMEBREW_PREFIX/bin:$PATH"
+echo '<-- /Configuring shell [.zshrc]'

@@ -1,20 +1,13 @@
-#!/bin/zsh
-echo '--> Setting environment variables'
+#!/usr/bin/env zsh
+echo '--> Setting environment variables [.zshenv]'
+
 export EDITOR="subl -w"
 export HOMEBREW_AUTO_UPDATE_SECS=86400
-export HOMEBREW_BUNDLE_FILE=$HOME/.Brewfile-dev
 export NVM_DIR="$HOME/.nvm"
 export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_VENV_IN_PROJECT=1
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-echo " .. set PATH"
-PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-PATH="$PYENV_ROOT/bin:$PATH"
-PATH="$HOME/.poetry/bin:$PATH"
-PATH="$HOME/.local/bin:$PATH"
-PATH="$HOMEBREW_PREFIX/bin:$PATH"
-export PATH
+export PYENV_VENV_IN_PROJECT=1
 
 # ==== taken from the Homebrew install script
 echo " .. run homebrew shellenv"
@@ -37,3 +30,14 @@ do
     echo -n "$FLAG "
 done
 echo ""
+
+# moved to bottom of .zshrc to ensure it's the last one
+# echo " .. set PATH"
+# PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+# PATH="$PYENV_ROOT/bin:$PATH"
+# PATH="$HOME/.poetry/bin:$PATH"
+# PATH="$HOME/.local/bin:$PATH"
+# PATH="$HOMEBREW_PREFIX/bin:$PATH"
+# export PATH
+# echo $PATH
+echo '<-- /Setting environment variables [.zshenv]'

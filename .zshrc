@@ -11,6 +11,7 @@ alias dc="docker compose"
 alias mc="mutagen compose"
 alias manage="docker compose run --rm django"
 alias heroky="heroku run python manage.py"
+alias git-signing-key="gpg --list-secret-keys --keyid-format=long | grep 'sec' | awk '{ print \$2 }' | awk -F '/' '{ print \$2 }'"
 
 if [ -f "$HOME/.aliases" ]; then
     echo " .. add local aliases"

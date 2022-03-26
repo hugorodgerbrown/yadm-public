@@ -1,7 +1,7 @@
 [user]
   name =
   email =
-  # gpg --list-secret-keys --keyid-format=long
+  # see `git signing-key` alias
   signingkey =
 [commit]
   gpgsign = true
@@ -15,3 +15,4 @@
   push-new = "!git push --set-upstream origin $(git branch --show-current)"
   tag-release = "!git tag $1 -m 'Release version $1' && git push origin $1"
   purge = "!git ls-files --others --exclude-standard | xargs rm -v"
+  signing-key = "!gpg --list-secret-keys --keyid-format=long | grep 'sec' | awk '{ print $2 }' | awk -F '/' '{ print $2 }'"

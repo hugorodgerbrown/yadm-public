@@ -1,8 +1,10 @@
-# Fig pre block. Keep at the top of this file.
+#!/usr/bin/env zsh
+
 export PATH="${PATH}:${HOME}/.local/bin"
+
+# Fig pre block. Keep at the top of this file.
 eval "$(fig init zsh pre)"
 
-#!/usr/bin/env zsh
 echo '--> Configuring shell [.zshrc]'
 echo ' .. set zsh options'
 source $HOME/.zsh_options
@@ -77,4 +79,3 @@ echo '<-- /Configuring shell [.zshrc]'
 
 # Fig post block. Keep at the bottom of this file.
 eval "$(fig init zsh post)"
-

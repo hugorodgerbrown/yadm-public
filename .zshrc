@@ -1,8 +1,6 @@
-# Fig pre block. Keep at the top of this file.
-export PATH="${PATH}:${HOME}/.local/bin"
-eval "$(fig init zsh pre)"
-
 #!/usr/bin/env zsh
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 echo '--> Configuring shell [.zshrc]'
 echo ' .. set zsh options'
 source $HOME/.zsh_options
@@ -73,8 +71,10 @@ PATH="$PYENV_ROOT/bin:$PATH"
 PATH="$HOME/.poetry/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
+# fixes issue with pre-commit not finding packages
+PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
+
 echo '<-- /Configuring shell [.zshrc]'
 
 # Fig post block. Keep at the bottom of this file.
-eval "$(fig init zsh post)"
-
+. "$HOME/.fig/shell/zshrc.post.zsh"

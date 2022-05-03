@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+setopt HIST_IGNORE_ALL_DUPS         # ignore duplication command history list
+setopt HIST_VERIFY                  # expand history onto the current line instead of executing it
+setopt HIST_EXPIRE_DUPS_FIRST       # remove oldest duplicate commands from the history first
+setopt HIST_IGNORE_SPACE            # don't save commands beginning with spaces to history
+setopt HIST_FIND_NO_DUPS            # skip through duplicates when navigating history

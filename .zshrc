@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
+export PATH="${PATH}:${HOME}/.local/bin"
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
+eval "$(fig init zsh pre)"
+
 echo '--> Configuring shell [.zshrc]'
 echo ' .. set zsh options'
 source $HOME/.zsh_options
@@ -21,6 +23,16 @@ if [ -f "$HOME/.aliases" ]; then
 fi
 
 echo ' .. add shell functions'
+# resets the global git config and injects signing key
+reset-git-config(){
+    echo "Resetting global git config username, email and signing-key"
+    vared -p "What is your name? " -c GIT_USER_NAME
+    vared -p "What is your email? " -c GIT_USER_EMAIL
+    git config --global user.name $GIT_USER_NAME
+    git config --global user.email $GIT_USER_EMAIL
+    git config --global user.signingkey $(git-signing-key)
+}
+
 rebuild-container(){
     CONTAINER="${1:-django}"
     MODE="${2:-}"
@@ -77,4 +89,4 @@ PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
 echo '<-- /Configuring shell [.zshrc]'
 
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+eval "$(fig init zsh post)"

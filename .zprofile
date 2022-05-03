@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
-
+export PATH="${PATH}:${HOME}/.local/bin"
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zprofile.pre.zsh"
-
+eval "$(fig init zsh pre)"
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zprofile.post.zsh"
+eval "$(fig init zsh post)"

@@ -10,8 +10,7 @@ alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'
 alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v"
 alias ll="ls -al"
 alias dc="docker compose"
-alias mc="mutagen compose"
-alias manage="docker compose run --rm django"
+alias manage="poetry run python manage.py"
 alias heroky="heroku run python manage.py"
 alias git-signing-key="gpg --list-secret-keys --keyid-format=long | grep 'sec' | awk '{ print \$2 }' | awk -F '/' '{ print \$2 }'"
 
@@ -68,9 +67,13 @@ echo " .. Initialising NVM"
 # This loads nvm bash_completion
 [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
-echo " .. Initialising starship prompt"
+echo " .. Initialising Starship prompt"
 eval "$(starship init zsh)"
 
+echo " .. Initialising 1Password shell integration"
+eval "$(op completion zsh)"; compdef _op op
+
+echo " .. Initialising iterm shell integration"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Moved from .zshenv to ensure it's the last thing that runs, otherwise
@@ -83,5 +86,4 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 # fixes issue with pre-commit not finding packages
 PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
-
 echo '<-- /Configuring shell [.zshrc]'

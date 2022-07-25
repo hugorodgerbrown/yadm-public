@@ -8,6 +8,8 @@ export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_VENV_IN_PROJECT=1
+# blank format suppresses output
+export DIRENV_LOG_FORMAT=
 
 # ==== taken from the Homebrew install script
 echo " .. run homebrew shellenv"

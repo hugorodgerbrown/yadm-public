@@ -1,16 +1,18 @@
 format = """\
+    $directory\
+    $git_branch\
+    $package\
+    $line_break\
     $python\
     $nodejs\
-    $git_branch\
+    $nix_shell\
     $env_var\
     $cmd_duration\
     $custom\
-    $line_break\
-    $directory\
-    $package\
     $git_commit\
     $git_state\
     $git_status\
+    $status\
     $character\
     """
 
@@ -20,8 +22,5 @@ symbol = ""
 [git_status]
 style = "gray"
 
-[env_var]
-style = "white"
-symbol = "🐳 "
-variable = "DOCKER_IMAGE_TAG"
-format = "via [$symbol$env_value]($style) "
+[status]
+disabled = false

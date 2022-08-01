@@ -10,9 +10,7 @@ alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'
 alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v"
 alias ll="ls -al"
 alias dc="docker compose"
-alias manage="poetry run python manage.py"
 alias heroky="heroku run python manage.py"
-alias git-signing-key="gpg --list-secret-keys --keyid-format=long | grep 'sec' | awk '{ print \$2 }' | awk -F '/' '{ print \$2 }'"
 
 if [ -f "$HOME/.aliases" ]; then
     echo " .. add local aliases"
@@ -20,22 +18,16 @@ if [ -f "$HOME/.aliases" ]; then
 fi
 
 echo ' .. add shell functions'
+
 # resets the global git config and injects signing key
 reset-git-config(){
     echo "Resetting global git config username, email and signing-key"
     vared -p "What is your name? " -c GIT_USER_NAME
     vared -p "What is your email? " -c GIT_USER_EMAIL
+    cp $HOME/.gitconfig.tpl $HOME/.gitconfig
     git config --global user.name $GIT_USER_NAME
     git config --global user.email $GIT_USER_EMAIL
-    git config --global user.signingkey $(git-signing-key)
-}
-
-rebuild-container(){
-    CONTAINER="${1:-django}"
-    MODE="${2:-}"
-    echo "Stopping $CONTAINER container" && docker compose stop $CONTAINER
-    echo "Removing $CONTAINER container" && docker compose rm -sf $CONTAINER
-    echo "Creating $CONTAINER container" && docker compose up $MODE $CONTAINER
+    git config --global user.signingkey $(git signing-key)
 }
 
 # outputs the number of PRs merged and line diff between two dates

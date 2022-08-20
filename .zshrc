@@ -46,6 +46,12 @@ echo ' .. bind keys'
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
+# Ensure direnv call is after the nix init
+echo " .. Initialising nix"
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
 echo " .. Initialising direnv"
 eval "$(direnv hook zsh)"
 

@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
-export PATH="${PATH}:${HOME}/.local/bin"
-
 echo '--> Configuring shell [.zshrc]'
+
 echo ' .. set zsh options'
 source $HOME/.zsh_options
+
+export PATH="${PATH}:${HOME}/.local/bin"
 
 echo ' .. add default aliases'
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'

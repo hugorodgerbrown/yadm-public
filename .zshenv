@@ -11,6 +11,10 @@ export PYENV_VENV_IN_PROJECT=1
 # blank format suppresses output
 export DIRENV_LOG_FORMAT=
 
+# export PYPI_USERNAME=__token__
+# echo ".. inject secrets from 1Password"
+# export PYPI_PASSWORD=$(echo "{{ op://personal/pypi/api token}}" | op inject)
+
 # ==== taken from the Homebrew install script
 echo " .. run homebrew shellenv"
 UNAME_MACHINE="$(/usr/bin/uname -m)"
@@ -42,4 +46,5 @@ echo ""
 # PATH="$HOMEBREW_PREFIX/bin:$PATH"
 # export PATH
 # echo $PATH
+
 echo '<-- /Setting environment variables [.zshenv]'

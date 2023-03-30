@@ -28,7 +28,7 @@ fi
 # /==== taken from the Homebrew install script
 
 echo -n ' .. set compiler flags: '
-for FLAG in qpdf readline zlib openssl pango glib
+for FLAG in qpdf readline zlib openssl pango glib libxmlsec1
 do
     export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/$FLAG/lib"
     export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/$FLAG/include"

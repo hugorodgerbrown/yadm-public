@@ -7,7 +7,7 @@ source $HOME/.zsh_options
 export PATH="${PATH}:${HOME}/.local/bin"
 
 echo ' .. add default aliases'
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew -v'
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v"
 alias ll="ls -al"
 alias dc="docker compose"

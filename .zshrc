@@ -7,9 +7,7 @@ source $HOME/.zsh_options
 export PATH="${PATH}:${HOME}/.local/bin"
 
 echo ' .. add default aliases'
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-alias clear_pyc="find . -type f -name '*.pyc' | xargs rm -v"
-alias ll="ls -al"
+alias ll="ls -alh"
 
 if [ -f "$HOME/.aliases" ]; then
     echo " .. add local aliases"
@@ -18,34 +16,13 @@ fi
 
 echo ' .. add shell functions'
 
-# resets the global git config and injects signing key
-reset-git-config(){
-    echo "Resetting global git config username, email and signing-key"
-    vared -p "What is your name? " -c GIT_USER_NAME
-    vared -p "What is your email? " -c GIT_USER_EMAIL
-    cp $HOME/.gitconfig.tpl $HOME/.gitconfig
-    git config --global user.name $GIT_USER_NAME
-    git config --global user.email $GIT_USER_EMAIL
-    git config --global user.signingkey $(git signing-key)
-}
-
 # https://superuser.com/a/418299
 echo ' .. bind keys'
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
-# Ensure direnv call is after the nix init
-#echo " .. Initialising nix"
-#if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-#    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-#fi
-
 echo " .. Initialising direnv"
 eval "$(direnv hook zsh)"
-
-echo " .. Initialising pyenv"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
 
 echo " .. Initialising NVM"
 # This loads nvm
@@ -56,9 +33,6 @@ echo " .. Initialising NVM"
 echo " .. Initialising Starship prompt"
 eval "$(starship init zsh)"
 
-#echo " .. Initialising 1Password shell integration"
-#eval "$(op completion zsh)"; compdef _op op
-
 echo " .. Initialising iterm shell integration"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -66,11 +40,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # the /etc/zprofile overtakes it.
 echo " .. set PATH"
 PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-PATH="$PYENV_ROOT/bin:$PATH"
-PATH="$HOME/.poetry/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/bin:$PATH"
 # fixes issue with pre-commit not finding packages
 PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:$PATH"
-echo '<-- /Configuring shell [.zshrc]'
+PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+echo '<-- /Configuring shell [.zshrc]'

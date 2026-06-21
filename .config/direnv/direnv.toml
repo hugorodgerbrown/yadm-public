@@ -2,4 +2,4 @@
 load_dotenv = true
 
 [whitelist]
-exact = [ "$HOME/Projects/yunojuno/platform" ]
+prefix = [ "/Users/hugo/Projects" ]

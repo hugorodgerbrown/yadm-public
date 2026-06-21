@@ -4,12 +4,8 @@ echo '--> Setting environment variables [.zshenv]'
 export EDITOR="subl -w"
 export HOMEBREW_AUTO_UPDATE_SECS=86400
 export NVM_DIR="$HOME/.nvm"
-export PIPENV_VENV_IN_PROJECT=1
-export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PYENV_VENV_IN_PROJECT=1
 # blank format suppresses output
-export DIRENV_LOG_FORMAT=
+# export DIRENV_LOG_FORMAT=
 
 # export PYPI_USERNAME=__token__
 # echo ".. inject secrets from 1Password"
@@ -37,14 +33,5 @@ do
 done
 echo ""
 
-# moved to bottom of .zshrc to ensure it's the last one
-# echo " .. set PATH"
-# PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-# PATH="$PYENV_ROOT/bin:$PATH"
-# PATH="$HOME/.poetry/bin:$PATH"
-# PATH="$HOME/.local/bin:$PATH"
-# PATH="$HOMEBREW_PREFIX/bin:$PATH"
-# export PATH
-# echo $PATH
-
+# PATH moved to bottom of .zshrc to ensure it's the last one
 echo '<-- /Setting environment variables [.zshenv]'

@@ -1,4 +1,5 @@
 tap "microsoft/git"
+
 brew "direnv"
 brew "gh"
 brew "git"
@@ -19,4 +20,8 @@ brew "yadm"
 brew "yarn"
 brew "zbar"
 brew "zlib"
+
+cask "1password-cli"
 cask "iterm2"
+cask "font-jetbrains-mono-nerd-font"
+cask "ngrok"
